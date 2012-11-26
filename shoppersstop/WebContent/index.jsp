@@ -6,6 +6,6 @@
 <title>Hello</title>
 </head>
 <body>
-Hello World
+<% out.println("Hello World"); %>
 </body>
 </html>
