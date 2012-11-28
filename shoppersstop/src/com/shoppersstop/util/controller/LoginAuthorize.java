@@ -17,14 +17,14 @@ import com.shoppersstop.util.model.UserDbTransactions;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/LoginAuthorize")
+public class LoginAuthorize extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public LoginAuthorize() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,7 +49,6 @@ public class Login extends HttpServlet {
 	    String username = request.getParameter("txtUsername");
 	    String password = request.getParameter("txtPassword");
 
-	    session.setAttribute("user", username);
 	    System.out.println(username);
 	    System.out.println("Servlet : "+password);
 	    System.out.println(password.length());
@@ -60,28 +59,28 @@ public class Login extends HttpServlet {
 			response.sendRedirect("EmailVerification");
 		    }
 		    session.setAttribute("user", username);
-		    session.setAttribute("AdminAuth", true);
-		    session.setAttribute("ClientAuth", false);
+		    session.setAttribute("adminAuth", true);
+		    session.setAttribute("clientAuth", false);
 		    session.setAttribute("homeurl","admin/dashboard");
 
 		    response.getWriter().println("Admin Login Successful");
-		    //		    response.sendRedirect("admin/dashboard");
+//		    response.sendRedirect("admin/dashboard");
 
-		}/* else if(UserDbTransactions.checkClientTable(dbconnection, username, password)){
+		} else if(UserDbTransactions.checkClientTable(dbconnection, username, password)){
 		    if(!UserDbTransactions.checkClientVerification(dbconnection, username)){
 			response.sendRedirect("EmailVerification");
 		    }
 		    session.setAttribute("user", username);
-		    session.setAttribute("AdminAuth", false);
-		    session.setAttribute("ClientAuth", true);
+		    session.setAttribute("adminAuth", false);
+		    session.setAttribute("clientAuth", true);
 		    session.setAttribute("homeurl","client/dashboard");
 		    response.sendRedirect("client/dashboard");
 		} else {
-		    session.setAttribute("AdminAuth", false);
-		    session.setAttribute("ClientAuth", false);
-		    request.setAttribute("AuthCheck", false);
+		    session.setAttribute("adminAuth", false);
+		    session.setAttribute("clientAuth", false);
+		    request.setAttribute("authCheck", false);
 		    request.getRequestDispatcher("Login").forward(request, response);
-		}*/
+		}
 	    } catch (SQLException e) {
 		e.printStackTrace();
 		response.sendRedirect("DatabaseError.jsp");

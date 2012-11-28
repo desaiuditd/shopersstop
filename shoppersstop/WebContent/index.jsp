@@ -47,7 +47,7 @@
 					<button id="joinus" class="btn btn-primary btn-large">Join Us</button>
 				</div>
 				<div class="span">
-					<form id="frmLogin" action="Login" method="post" class="form-horizontal">
+					<form id="frmLogin" action="LoginAuthorize" method="post" class="form-horizontal">
 						<fieldset>
 							<legend>Login</legend>
 							<div class="control-group">
@@ -62,6 +62,18 @@
 									<input type="password" id="txtPassword" name="txtPassword" placeholder="Password" required minLength=6>
 								</div>
 							</div>
+
+							<div class="control-group">
+    							<div class="text-error" style="margin-left : 45%;">
+    								<%
+  										try{
+  											if(!(Boolean)request.getAttribute("AuthCheck"))
+												out.print("Wrong UserName or Password");
+  										} catch(Exception e) { }
+  									%>
+  								</div>
+  							</div>
+
 							<div class="control-group">
 								<div class="controls">
 									<a id="aForgotPwd" href="#">Forgot Password ?</a>
