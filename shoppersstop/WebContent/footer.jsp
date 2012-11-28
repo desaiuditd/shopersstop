@@ -1,6 +1,6 @@
 <footer class="container-fluid navbar navbar-fixed-bottom">
 	<hr>
-	<div class="row pull-right" style="0% 10% 10% 0%">
+	<div class="row pull-right" style="margin: 0% 0.5% 0.5% 0%">
 		<a class="span" href="#">About</a>
 		<a class="span" href="#">FAQ</a>
 		<a class="span" href="#">Contact us</a>
