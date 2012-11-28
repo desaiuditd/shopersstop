@@ -58,26 +58,25 @@ public class LoginAuthorize extends HttpServlet {
 		    if(!UserDbTransactions.checkAdminVerification(dbconnection, username)) {
 			response.sendRedirect("EmailVerification");
 		    }
-		    session.setAttribute("user", username);
+		    session.setAttribute("username", username);
 		    session.setAttribute("adminAuth", true);
-		    session.setAttribute("clientAuth", false);
+		    session.setAttribute("userAuth", false);
 		    session.setAttribute("homeurl","admin/dashboard");
 
-		    response.getWriter().println("Admin Login Successful");
-//		    response.sendRedirect("admin/dashboard");
+		    response.sendRedirect("admin/dashboard");
 
 		} else if(UserDbTransactions.checkClientTable(dbconnection, username, password)){
 		    if(!UserDbTransactions.checkClientVerification(dbconnection, username)){
 			response.sendRedirect("EmailVerification");
 		    }
-		    session.setAttribute("user", username);
+		    session.setAttribute("username", username);
 		    session.setAttribute("adminAuth", false);
-		    session.setAttribute("clientAuth", true);
-		    session.setAttribute("homeurl","client/dashboard");
-		    response.sendRedirect("client/dashboard");
+		    session.setAttribute("userAuth", true);
+		    session.setAttribute("homeurl","user/dashboard");
+		    response.sendRedirect("user/dashboard");
 		} else {
 		    session.setAttribute("adminAuth", false);
-		    session.setAttribute("clientAuth", false);
+		    session.setAttribute("userAuth", false);
 		    request.setAttribute("authCheck", false);
 		    request.getRequestDispatcher("Login").forward(request, response);
 		}

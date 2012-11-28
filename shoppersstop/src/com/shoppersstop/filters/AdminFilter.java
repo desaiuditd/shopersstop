@@ -42,12 +42,12 @@ public class AdminFilter implements Filter {
 
 	    HttpSession session = ((HttpServletRequest)request).getSession();
 	    try {
-		Boolean AdminAuth = (Boolean) session.getAttribute("AdminAuth");
+		Boolean AdminAuth = (Boolean) session.getAttribute("adminAuth");
 		if (AdminAuth == false || AdminAuth == null) {
 		    throw new NullPointerException();
 		}
 	    } catch (NullPointerException e) {
-		((HttpServletResponse)response).sendRedirect("/cadet/Login");
+		((HttpServletResponse)response).sendRedirect("/shoppersstop/Login");
 		return;
 	    }
 	    chain.doFilter(request, response);

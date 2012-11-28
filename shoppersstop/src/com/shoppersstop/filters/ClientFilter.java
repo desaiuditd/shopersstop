@@ -42,12 +42,12 @@ public class ClientFilter implements Filter {
 
 	    HttpSession session = ((HttpServletRequest)request).getSession();
 	    try {
-		Boolean clientAuth = (Boolean) session.getAttribute("clientAuth");
-		if (clientAuth == false || clientAuth == null) {
+		Boolean userAuth = (Boolean) session.getAttribute("userAuth");
+		if (userAuth == false || userAuth == null) {
 		    throw new NullPointerException();
 		}
 	    } catch (NullPointerException e) {
-		((HttpServletResponse)response).sendRedirect("/cadet/Login");
+		((HttpServletResponse)response).sendRedirect("/shoppersstop/Login");
 		return;
 	    }
 
