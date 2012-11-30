@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Shoppers Stop | Admin</title>
+        <title>Shoppers Stop | Home</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -43,6 +43,6 @@
 
         <script src="../js/jquery-1.8.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-		<script src="js/dashboard.js"></script>
+        <script src="js/dashboard.js"></script>
     </body>
 </html>

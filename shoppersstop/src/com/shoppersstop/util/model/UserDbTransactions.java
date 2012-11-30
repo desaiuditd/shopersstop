@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class UserDbTransactions {
 
     public static boolean checkAdminTable(Connection dbconnection, String username, String password) throws SQLException {
@@ -41,7 +40,7 @@ public class UserDbTransactions {
     public static boolean checkAdminVerification(Connection dbconnection, String username) throws SQLException {
 
 	boolean ret = false;
-	PreparedStatement statement = dbconnection.prepareStatement(Constants.sqlCommands.CheckAdminVerification);
+	PreparedStatement statement = dbconnection.prepareStatement(Constants.sqlCommands.checkAdminVerification);
 	statement.setString(1, username);
 	ResultSet rs = statement.executeQuery();
 	if(rs.next())
@@ -53,7 +52,7 @@ public class UserDbTransactions {
 	return ret;
     }
 
-    public static boolean checkClientTable(Connection dbconnection, String username, String password) throws SQLException {
+    public static boolean checkUserTable(Connection dbconnection, String username, String password) throws SQLException {
 
 	if(password==null) return false;
 	Boolean ret = false;
@@ -61,7 +60,7 @@ public class UserDbTransactions {
 	PreparedStatement ps=null;
 	ResultSet rs=null;
 
-	ps = dbconnection.prepareStatement(Constants.sqlCommands.retrivePasswordClient);
+	ps = dbconnection.prepareStatement(Constants.sqlCommands.retrivePasswordUser);
 	ps.setString(1,username);
 	rs = ps.executeQuery();
 
@@ -76,8 +75,19 @@ public class UserDbTransactions {
 	return ret;
     }
 
-    public static boolean checkClientVerification(Connection dbconnection, String username) {
-	return false;
+    public static boolean checkUserVerification(Connection dbconnection, String username) throws SQLException {
+
+	boolean ret = false;
+	PreparedStatement statement = dbconnection.prepareStatement(Constants.sqlCommands.checkUserVerification);
+	statement.setString(1, username);
+	ResultSet rs = statement.executeQuery();
+	if(rs.next())
+	    if(rs.getString("verified").equals("Y"))
+		ret = true;
+
+	rs.close();
+	statement.close();
+	return ret;
     }
 
     private static Boolean verifyPasswords(String Password1,String Password2) {
@@ -85,7 +95,7 @@ public class UserDbTransactions {
 	Temppassword = Hashify(Password1);
 
 	System.out.println("Verify : Actual Pwd in DB : "+Temppassword);
-	System.out.println(Temppassword.length());
+
 	if(Temppassword.equals(Password2)){
 	    return true;
 	}else {
@@ -107,5 +117,30 @@ public class UserDbTransactions {
 	    e.printStackTrace();
 	}
 	return Hash;
+    }
+
+    public static boolean isUserAvailable(Connection dbconnection, String username) throws SQLException {
+
+	Boolean ret=false;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+
+	ps = dbconnection.prepareStatement(Constants.sqlCommands.isUserAvailable);
+	ps.setString(1,username);
+	rs = ps.executeQuery();
+
+	if(rs.next()) {
+	    int count = rs.getInt("count");
+	    System.out.println(count);
+	    if(count==0){
+		ret=true;
+	    }
+	}
+
+	rs.close();
+	ps.close();
+
+	System.out.println(ret);
+	return ret;
     }
 }

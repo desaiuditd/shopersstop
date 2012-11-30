@@ -1,4 +1,4 @@
-<footer class="container-fluid navbar navbar-fixed-bottom">
+<footer class="container-fluid navbar navbar-fixed-bottom" style="background-color: white;">
 	<hr>
 	<div class="row pull-right" style="margin: 0% 0.5% 0.5% 0%">
 		<a class="span" href="#">About</a>

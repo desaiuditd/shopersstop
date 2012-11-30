@@ -51,38 +51,45 @@ public class LoginAuthorize extends HttpServlet {
 
 	    System.out.println(username);
 	    System.out.println("Servlet : "+password);
-	    System.out.println(password.length());
 
 	    try {
 		if(UserDbTransactions.checkAdminTable(dbconnection, username, password)) {
+
+		    session.setAttribute("username", username);
 		    if(!UserDbTransactions.checkAdminVerification(dbconnection, username)) {
 			response.sendRedirect("EmailVerification");
+			return;
 		    }
-		    session.setAttribute("username", username);
 		    session.setAttribute("adminAuth", true);
 		    session.setAttribute("userAuth", false);
 		    session.setAttribute("homeurl","admin/dashboard");
 
 		    response.sendRedirect("admin/dashboard");
+		    return;
 
-		} else if(UserDbTransactions.checkClientTable(dbconnection, username, password)){
-		    if(!UserDbTransactions.checkClientVerification(dbconnection, username)){
-			response.sendRedirect("EmailVerification");
-		    }
+		} else if(UserDbTransactions.checkUserTable(dbconnection, username, password)){
+
 		    session.setAttribute("username", username);
+		    if(!UserDbTransactions.checkUserVerification(dbconnection, username)){
+			response.sendRedirect("EmailVerification");
+			return;
+		    }
 		    session.setAttribute("adminAuth", false);
 		    session.setAttribute("userAuth", true);
 		    session.setAttribute("homeurl","user/dashboard");
 		    response.sendRedirect("user/dashboard");
+		    return;
 		} else {
 		    session.setAttribute("adminAuth", false);
 		    session.setAttribute("userAuth", false);
 		    request.setAttribute("authCheck", false);
 		    request.getRequestDispatcher("Login").forward(request, response);
+		    return;
 		}
 	    } catch (SQLException e) {
 		e.printStackTrace();
 		response.sendRedirect("DatabaseError.jsp");
+		return;
 	    }
 	}
 }

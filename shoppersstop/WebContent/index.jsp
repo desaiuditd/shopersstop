@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Shoppers Stop</title>
+        <title>Shoppers Stop | Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -29,6 +29,15 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
+		<noscript>
+			<style>
+	            .navbar,.container-fluid,footer {
+	                display: none;
+	            }
+	        </style>
+	        <p align="center">Your browser does not support JavaScript!</p>
+		</noscript>
+
 		<jsp:include page="navbar.jsp"></jsp:include>
 
 		<div class="contianer-fluid">
@@ -37,8 +46,7 @@
 				<h2 class="offset4">Welcome !!</h2>
 			</div>
 			<div class="container-fluid offset1 span row">
-				<div class="offset1 span5">
-					<div class="clearfix">&nbsp;</div>
+				<div class="offset1 span4">
 					<div class="clearfix">&nbsp;</div>
 					<div class="clearfix">&nbsp;</div>
 					<div class="clearfix">&nbsp;</div>
@@ -46,7 +54,7 @@
 					<div class="clearfix">&nbsp;</div>
 					<button id="joinus" class="btn btn-primary btn-large">Join Us</button>
 				</div>
-				<div class="span">
+				<div class="span" style="border-left: #c1c1c1 2px solid; padding-left: 70px;">
 					<form id="frmLogin" action="LoginAuthorize" method="post" class="form-horizontal">
 						<fieldset>
 							<legend>Login</legend>
@@ -67,7 +75,7 @@
     							<div class="text-error" style="margin-left : 45%;">
     								<%
   										try{
-  											if(!(Boolean)request.getAttribute("AuthCheck"))
+  											if(!(Boolean)request.getAttribute("authCheck"))
 												out.print("Wrong UserName or Password");
   										} catch(Exception e) { }
   									%>

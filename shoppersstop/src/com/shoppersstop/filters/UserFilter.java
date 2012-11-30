@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class ClientFilter
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD,
-	DispatcherType.INCLUDE }, description = "Client Authentication Filter", urlPatterns = { "/client/*" })
-public class ClientFilter implements Filter {
+	DispatcherType.INCLUDE }, description = "Client Authentication Filter", urlPatterns = { "/user/*" })
+public class UserFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public ClientFilter() {
+    public UserFilter() {
         // TODO Auto-generated constructor stub
     }
 

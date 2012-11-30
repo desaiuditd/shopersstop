@@ -6,23 +6,34 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="#home">Shoppers Stop</a>
+			<a class="brand" href="home">Shoppers Stop</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav nav-pills pull-right">
 					<li>
-						<div class="btn-group">
+						<div id="divControlAccess" class="btn-group">
 							<a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-								Guest
+								<%
+									String username = (String)session.getAttribute("username");
+									if(username==null)
+									    out.println("Guest");
+									else out.println(username);
+								%>
 								<span class="caret"></span>
 							</a>
-<!-- 							<div class="dropdown-menu">
+							<%
+								if(username!=null) {
+							%>
+ 							<div class="dropdown-menu">
 								<div>
 									<a class="span" href="#account">Account</a>
 								</div>
 								<div class="span">
-									<button type="submit" class="btn btn-danger">Logout</button>
+									<button id="btnLogout" class="btn btn-danger">Logout</button>
 								</div>
-							</div> -->
+							</div>
+							<%	    
+								}
+							%>
 						</div>
 					</li>
 				</ul>

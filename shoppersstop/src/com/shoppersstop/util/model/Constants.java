@@ -14,8 +14,10 @@ public class Constants {
     public static final class sqlCommands{
 
 	public static final String retrivePasswordAdmin = "SELECT password FROM admin WHERE username = ?";
-	public static final String CheckAdminVerification = "SELECT verified FROM admin WHERE username = ?";
-	public static final String retrivePasswordClient = "SELECT password FROM customer WHERE username = ?";
+	public static final String checkAdminVerification = "SELECT verified FROM admin WHERE username = ?";
+	public static final String checkUserVerification = "SELECT verified FROM user WHERE username = ?";
+	public static final String retrivePasswordUser = "SELECT password FROM user WHERE username = ?";
+	public static final String isUserAvailable = "SELECT COUNT(DISTINCT userName) AS count FROM user WHERE userName = ?";
     }
 
     public static final class email{
