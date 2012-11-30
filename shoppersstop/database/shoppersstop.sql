@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2012 at 06:28 PM
+-- Generation Time: Nov 30, 2012 at 06:54 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -105,44 +105,21 @@ CREATE TABLE IF NOT EXISTS `product` (
   `pqty` int(11) NOT NULL,
   `pprice` double NOT NULL,
   `pavailability` int(11) NOT NULL,
-  PRIMARY KEY (`pid`)
+  `cname` varchar(64) NOT NULL,
+  PRIMARY KEY (`pid`),
+  KEY `cname` (`cname`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`pid`, `pname`, `pdesc`, `pqty`, `pprice`, `pavailability`) VALUES
-(1, 'Harry Potter Part 1', 'abc', 100, 300, 0),
-(2, 'Da Vinci code', 'def', 550, 50, 0),
-(3, 'Yoga for Beginners', 'gef', 60, 350, 0),
-(4, 'Wings of Fire', 'written by Dr. A.P.J. Abdul Kalam', 15, 400, 0),
-(5, 'Bloodline', 'Sydney Sheldon', 0, 250, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_category`
---
-
-DROP TABLE IF EXISTS `product_category`;
-CREATE TABLE IF NOT EXISTS `product_category` (
-  `pid` int(11) NOT NULL,
-  `cname` varchar(64) NOT NULL,
-  PRIMARY KEY (`pid`,`cname`),
-  KEY `cname` (`cname`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `product_category`
---
-
-INSERT INTO `product_category` (`pid`, `cname`) VALUES
-(1, 'Fiction'),
-(2, 'Fiction'),
-(5, 'Fiction'),
-(3, 'Health care'),
-(4, 'Non-fiction');
+INSERT INTO `product` (`pid`, `pname`, `pdesc`, `pqty`, `pprice`, `pavailability`, `cname`) VALUES
+(1, 'Harry Potter Part 1', 'abc', 100, 300, 0, 'Fiction'),
+(2, 'Da Vinci code', 'def', 550, 50, 0, 'Fiction'),
+(3, 'Yoga for Beginners', 'gef', 60, 350, 0, 'Health care'),
+(4, 'Wings of Fire', 'written by Dr. A.P.J. Abdul Kalam', 15, 400, 0, 'Non-fiction'),
+(5, 'Bloodline', 'Sydney Sheldon', 0, 250, 0, 'Fiction');
 
 -- --------------------------------------------------------
 
@@ -195,11 +172,10 @@ ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `product_category`
+-- Constraints for table `product`
 --
-ALTER TABLE `product_category`
-  ADD CONSTRAINT `product_category_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `product_category_ibfk_2` FOREIGN KEY (`cname`) REFERENCES `category` (`cname`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cname`) REFERENCES `category` (`cname`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
