@@ -1,2 +1,2 @@
-shopersstop
-===========
+Shoppers' Stop
+==============
